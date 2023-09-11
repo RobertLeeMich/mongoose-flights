@@ -5,7 +5,7 @@ function New() {
     <div>
       <h1>Create New Flight</h1>
       <form action="/flights" method="post">
-        {/* Previous form elements */}
+        {/* Your existing form elements here */}
         <div>
           <label>Airport:</label>
           <select name="airport">

@@ -2,6 +2,9 @@ const React = require('react');
 
 function Show(props) {
   const { flight, id } = props;
+  if (!flight) {
+    return <div>Flight not found</div>;
+  }
   return (
     <div>
       <h1>Flight Details</h1>
@@ -10,25 +13,8 @@ function Show(props) {
       <p>Departs: {flight.departs.toString()}</p>
       <p>Airport: {flight.airport}</p>
 
-      <h2>Add Destination</h2>
-      <form action={`/flights/${id}/destinations`} method="post">
-        <div>
-          <label>Airport:</label>
-          <select name="airport">
-            <option value="AUS">AUS</option>
-            <option value="DAL">DAL</option>
-            <option value="LAX">LAX</option>
-            <option value="SAN">SAN</option>
-            <option value="SEA">SEA</option>
-          </select>
-        </div>
-        <div>
-          <label>Arrival:</label>
-          <input type="datetime-local" name="arrival" />
-        </div>
-        <button type="submit">Add Destination</button>
-      </form>
-
+      {/* Form for adding destinations */}
+      {/* ... */}
       <h2>Destinations</h2>
       <ul>
         {flight.destinations.map((dest, i) => (
