@@ -7,7 +7,8 @@ function Index(props) {
       <ul>
         {props.flights.map((flight, i) => (
           <li key={i}>
-            {flight.airline}, {flight.flightNo}, {flight.departs.toString()}
+            {flight.airline}, {flight.flightNo}, {flight.departs.toString()} 
+            <a href={`/flights/${i}`}>Detail</a>
           </li>
         ))}
       </ul>
@@ -15,4 +16,4 @@ function Index(props) {
   );
 }
 
-module.exports = Index
+module.exports = Index;

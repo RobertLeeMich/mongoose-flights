@@ -5,17 +5,16 @@ function New() {
     <div>
       <h1>Create New Flight</h1>
       <form action="/flights" method="post">
+        {/* Previous form elements */}
         <div>
-          <label>Airline:</label>
-          <input type="text" name="airline" />
-        </div>
-        <div>
-          <label>Flight No:</label>
-          <input type="number" name="flightNo" />
-        </div>
-        <div>
-          <label>Departs:</label>
-          <input type="date" name="departs" />
+          <label>Airport:</label>
+          <select name="airport">
+            <option value="AUS">AUS</option>
+            <option value="DAL">DAL</option>
+            <option value="LAX">LAX</option>
+            <option value="SAN">SAN</option>
+            <option value="SEA">SEA</option>
+          </select>
         </div>
         <button type="submit">Submit</button>
       </form>
@@ -23,4 +22,4 @@ function New() {
   );
 }
 
-module.exports = New
+module.exports = New;
