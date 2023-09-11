@@ -1,19 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const { Flight, flightData } = require('../models/Flight');
+const Destination = require('../models/Destination');
 
-router.get('/', (req, res) => {
-  res.render('flights/Index', { flights: flightData });
+// ... Previous Routes
+
+router.get('/:id', (req, res) => {
+  const flight = flightData[req.params.id];
+  res.render('flights/Show', { flight, id: req.params.id });
 });
 
-router.get('/new', (req, res) => {
-  res.render('flights/New');
-});
-
-router.post('/', (req, res) => {
-  const newFlight = new Flight(req.body.airline, req.body.flightNo, req.body.departs);
-  flightData.push(newFlight);
-  res.redirect('/flights');
+router.post('/:id/destinations', (req, res) => {
+  const flight = flightData[req.params.id];
+  const newDestination = new Destination(req.body.airport, req.body.arrival);
+  flight.destinations.push(newDestination);
+  res.redirect(`/flights/${req.params.id}`);
 });
 
 module.exports = router;

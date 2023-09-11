@@ -15,4 +15,4 @@ function Index(props) {
   );
 }
 
-module.exports = Index;
+module.exports = Index

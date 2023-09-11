@@ -23,4 +23,4 @@ function New() {
   );
 }
 
-module.exports = New;
+module.exports = New
