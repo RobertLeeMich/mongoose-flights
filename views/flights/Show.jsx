@@ -12,9 +12,6 @@ function Show(props) {
       <p>Flight No: {flight.flightNo}</p>
       <p>Departs: {flight.departs.toString()}</p>
       <p>Airport: {flight.airport}</p>
-
-      {/* Form for adding destinations */}
-      {/* ... */}
       <h2>Destinations</h2>
       <ul>
         {flight.destinations.map((dest, i) => (

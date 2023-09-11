@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const flightData = []; // Replace this with your data store or model
+const flightData = [];
 
 router.get('/', (req, res) => {
   res.render('Index', { flights: flightData });
