@@ -38,10 +38,15 @@ app.get('/flights/new', (req, res) => {
   res.render('flights/New');
 });
 
-
 app.post('/flights', async (req, res) => {
   await Flight.create(req.body);
   res.redirect('flights');
+});
+
+//Show
+app.get('/flights/:id', async (req, res) => {
+  const flight = await Flight.findById(req.params.id);
+  res.render('flights/Show', { flight });
 });
 
 app.listen(3000, () => {

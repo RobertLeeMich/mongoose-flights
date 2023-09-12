@@ -7,7 +7,8 @@ function Index(props) {
       <ul>
         {props.flights.map((flight, index) => (
           <li key={index}>
-            {flight.airline} - {flight.flightNo} - {new Date(flight.departs).toString()}
+            {flight.airline} - {flight.flightNo} - {new Date(flight.departs).toString()} 
+            <a href={`/flights/${flight._id}`}>Detail</a>
           </li>
         ))}
       </ul>
