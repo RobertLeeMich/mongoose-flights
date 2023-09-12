@@ -1,14 +1,14 @@
+// views/Index.jsx
 const React = require('react');
 
 function Index(props) {
   return (
     <div>
-      <h1>Flight List</h1>
+      <h1>All Flights</h1>
       <ul>
-        {props.flights.map((flight, i) => (
-          <li key={i}>
-            {flight.airline}, {flight.flightNo}, {flight.departs.toString()}
-            <a href={`/flights/${i}`}>Detail</a>
+        {props.flights.map((flight, index) => (
+          <li key={index}>
+            {flight.airline} - {flight.flightNo} - {new Date(flight.departs).toString()}
           </li>
         ))}
       </ul>

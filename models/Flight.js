@@ -1,18 +1,22 @@
-const Destination = require('./Destination');
+const mongoose = require('mongoose');
 
-class Flight {
-  constructor(airline, flightNo, departs, airport = 'SAN', destinations = []) {
-    this.airline = airline;
-    this.flightNo = flightNo;
-    this.departs = departs || new Date(new Date().setFullYear(new Date().getFullYear() + 1));
-    this.airport = airport;
-    this.destinations = destinations;
-  }
-}
+const flightSchema = new mongoose.Schema({
+  airline: {
+    type: String,
+    enum: ['American', 'Southwest', 'United'],
+  },
+  flightNo: {
+    type: Number,
+    required: true,
+    min: 10,
+    max: 9999,
+  },
+  departs: {
+    type: Date,
+    default: function() {
+      return new Date().setFullYear(new Date().getFullYear() + 1);
+    },
+  },
+});
 
-const flightData = [];
-
-module.exports = {
-  Flight,
-  flightData
-};
+module.exports = mongoose.model('Flight', flightSchema);

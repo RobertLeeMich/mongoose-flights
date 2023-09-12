@@ -1,29 +1,37 @@
+// server.js
 const express = require('express');
+const path = require('path');
 const app = express();
-const path = require('path')
+const Flight = require('./models/Flight');
 
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
-//debug log
-console.log(__dirname)
 app.set('views', path.join(__dirname, 'views'));
+
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/flightTracker', { useNewUrlParser: true, useUnifiedTopology: true });
+
+
 app.use(express.urlencoded({ extended: false }));
 
 let flights = [
-  //data to show for testing
   { airline: 'American', flightNo: 123, departs: '2023-09-12T12:00:00Z' },
 ];
 
-app.get('/flights', (req, res) => {
-  //debug log
-  console.log('Trying to render Index view.');
+// Index
+app.get('/flights', async (req, res) => {
+  const flights = await Flight.find({});
   res.render('flights/Index', { flights });
 });
 
-app.get('/flights/new', (req, res) => {
-  res.render('flights/New');
+// New Flight
+app.post('/flights', async (req, res) => {
+  await Flight.create(req.body);
+  res.redirect('/flights');
 });
 
+// Create New Flight
 app.post('/flights', (req, res) => {
   const newFlight = req.body;
   flights.push(newFlight);
