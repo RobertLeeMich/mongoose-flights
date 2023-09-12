@@ -3,15 +3,20 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const Flight = require('./models/Flight');
+const mongoose = require('mongoose');
 
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
 app.set('views', path.join(__dirname, 'views'));
 
-const mongoose = require('mongoose');
-
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-
+//// Database Connection
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+mongoose.connection.once('open', () => {
+  console.log('connected to mongo');
+});
 
 app.use(express.urlencoded({ extended: false }));
 
@@ -28,13 +33,6 @@ app.get('/flights', async (req, res) => {
 // New Flight
 app.post('/flights', async (req, res) => {
   await Flight.create(req.body);
-  res.redirect('/flights');
-});
-
-// Create New Flight
-app.post('/flights', (req, res) => {
-  const newFlight = req.body;
-  flights.push(newFlight);
   res.redirect('/flights');
 });
 
