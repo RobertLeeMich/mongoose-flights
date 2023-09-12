@@ -1,39 +1,48 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
-const app = express();
-const Flight = require('./models/Flight');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
+const Flight = require('./models/Flight');
 
-app.set('view engine', 'jsx');
-app.engine('jsx', require('express-react-views').createEngine());
-app.set('views', path.join(__dirname, 'views'));
 
-//// Database Connection
+const app = express();
+
+// Database Connection
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
 mongoose.connection.once('open', () => {
-  console.log('connected to mongo');
+  console.log('Connected to MongoDB');
 });
 
+// Middleware
 app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride('_method'));
 
-let flights = [
-  { airline: 'American', flightNo: 123, departs: '2023-09-12T12:00:00Z' },
-];
+app.set('view engine', 'jsx');
+app.set('views', path.join(__dirname, 'views'));
+app.engine('jsx', require('express-react-views').createEngine());
 
-// Index
+// app.use(express.static('public'));
+
+//Index
 app.get('/flights', async (req, res) => {
   const flights = await Flight.find({});
   res.render('flights/Index', { flights });
 });
 
-// New Flight
+//New
+app.get('/flights/new', (req, res) => {
+  res.render('flights/New');
+});
+
+
 app.post('/flights', async (req, res) => {
   await Flight.create(req.body);
-  res.redirect('/flights');
+  res.redirect('flights');
 });
 
 app.listen(3000, () => {
