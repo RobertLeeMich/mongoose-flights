@@ -1,11 +1,8 @@
 require('dotenv').config();
 const express = require('express');
-const path = require('path');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const Flight = require('./models/Flight');
-
-
 const app = express();
 
 // Database Connection
@@ -22,9 +19,11 @@ mongoose.connection.once('open', () => {
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 
+const jsxViewEngine = require('jsx-view-engine');
+
 app.set('view engine', 'jsx');
-app.set('views', path.join(__dirname, 'views'));
-app.engine('jsx', require('express-react-views').createEngine());
+app.set('views', './views');
+app.engine('jsx', jsxViewEngine());
 
 // app.use(express.static('public'));
 

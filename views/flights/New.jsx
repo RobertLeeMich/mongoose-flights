@@ -1,4 +1,3 @@
-// views/New.jsx
 const React = require('react');
 
 function New() {

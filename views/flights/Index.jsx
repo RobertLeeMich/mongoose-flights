@@ -1,4 +1,3 @@
-// views/Index.jsx
 const React = require('react');
 
 function Index(props) {
