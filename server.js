@@ -10,7 +10,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/flightTracker', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 app.use(express.urlencoded({ extended: false }));
