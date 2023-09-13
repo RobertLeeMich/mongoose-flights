@@ -49,6 +49,15 @@ app.get('/flights/:id', async (req, res) => {
   res.render('flights/Show', { flight });
 });
 
+//Post
+app.post('/flights/:id/destinations', async (req, res) => {
+  const flight = await Flight.findById(req.params.id);
+  flight.destinations.push(req.body);
+  await flight.save();
+  res.redirect(`/flights/${req.params.id}`);
+});
+
+
 app.listen(3000, () => {
   console.log('Listening on port 3000');
 });
