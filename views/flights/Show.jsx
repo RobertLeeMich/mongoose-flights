@@ -2,6 +2,7 @@ const React = require('react');
 
 function Show(props) {
   const { flight, id } = props;
+  console.log('ID', id)
   if (!flight) {
     return <div>Flight not found</div>;
   }

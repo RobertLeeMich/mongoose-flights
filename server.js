@@ -46,7 +46,8 @@ app.post('/flights', async (req, res) => {
 //Show
 app.get('/flights/:id', async (req, res) => {
   const flight = await Flight.findById(req.params.id);
-  res.render('flights/Show', { flight });
+  const id = req.params.id
+  res.render('flights/Show', { flight ,id });
 });
 
 //Post
